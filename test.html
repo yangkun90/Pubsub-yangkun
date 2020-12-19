@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./pub-sub.js"></script>
+    <script>
+        /*
+        1 token subscribe(msgName,callback) 订阅消息 并返回一个标识token
+        2 publish(msgname,data)
+        3 publishSync(msgname,data)同步发布
+        4 unsubscribe(token)根据token订阅
+        */
+       PubSub.subscribe('add',()=>{
+           console.log('add1');
+       })
+       const token=PubSub.subscribe('add',()=>{
+           console.log('add2');
+       })
+       console.log(token);
+       PubSub.subscribe('delete',()=>{
+           console.log('delete()');
+       })
+    //    PubSub.unsubscribe(token)
+       PubSub.unsubscribe('add')
+       PubSub.publishSync('add','yangkun')
+       PubSub.publishSync('delete','delete')
+
+    </script>
+</body>
+</html>
